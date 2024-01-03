@@ -1,35 +1,39 @@
-import React , {useState} from "react";
+import React, { useState } from "react";
 import { MenuMenu, MenuItem, Menu, Container } from "semantic-ui-react";
 import CartSummary from "./CartSummary";
 import SignedOut from "./SignedOut";
 import SignedIn from "./SignedIn";
+import { useNavigate } from "react-router-dom";
 
 export default function Navi() {
-//default ya true ya false olmalıdır. 
-//isAuthenticated kullandığımız (ya isAuthenticated'dır ya da isAuthenticated değildir bu nedenle false) için useStatein defaultu false olmaldır 
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  //default ya true ya false olmalıdır.
+  //isAuthenticated kullandığımız (ya isAuthenticated'dır ya da isAuthenticated değildir bu nedenle false) için useStatein defaultu false olmaldır
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  function handleSignOut(){
-    setIsAuthenticated(false)
+  const navigate = useNavigate();
 
+  function handleSignOut() {
+    setIsAuthenticated(false);
+    navigate("/");
   }
 
-  function handleSignIn(){
-    setIsAuthenticated(true)
-
+  function handleSignIn() {
+    setIsAuthenticated(true);
   }
-
 
   return (
     <div>
-      <Menu inverted fixed = "top">
+      <Menu inverted fixed="top">
         <Container>
           <MenuItem name="home" />
           <MenuItem name="messages" />
           <MenuMenu position="right">
             <CartSummary />
-            {isAuthenticated?<SignedIn signOut={handleSignOut} />
-            :<SignedOut signIn={handleSignIn}/>}
+            {isAuthenticated ? (
+              <SignedIn signOut={handleSignOut} />
+            ) : (
+              <SignedOut signIn={handleSignIn} />
+            )}
           </MenuMenu>
         </Container>
       </Menu>

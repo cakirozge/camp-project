@@ -12,6 +12,7 @@ import {
   Table,
 } from "semantic-ui-react";
 import ProductService from "../services/productService";
+import { Link } from "react-router-dom";
 
 
 //distractor products:data , setProducts:fonksiyonu - useState[] default değeri boş bir array bunu değiştirmek istersem bu da -Hook -döndürür.
@@ -22,6 +23,7 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
 
   //sayfa yüklendiğinde burası çalışıyor.
+  //`/products/` stringleri direkt birleştirebiliriz.
   useEffect(() => {
     let productService = new ProductService();
     productService
@@ -43,13 +45,13 @@ export default function ProductList() {
         </TableHeader>
 
         <TableBody>
-          {products.map((products) => (
+          {products.map((product) => (
             <TableRow key={products.id}>
-              <TableCell>{products.title}</TableCell>
-              <TableCell>{products.description}</TableCell>
-              <TableCell>{products.price}</TableCell>
-              <TableCell>{products.brand}</TableCell>
-              <TableCell>{products.category}</TableCell>
+              <TableCell><Link to={`/products/${product.id}`}>{product.title}</Link></TableCell>
+              <TableCell>{product.description}</TableCell>
+              <TableCell>{product.price}</TableCell>
+              <TableCell>{product.brand}</TableCell>
+              <TableCell>{product.category}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -78,6 +80,7 @@ export default function ProductList() {
 }
 
 //Tablerow gelen ürün sayısı kadar tekrar edecek.
+// Altgr + , ile `` oluştururuz.
 
 // export interface ProductList {
 // 	id: number;
