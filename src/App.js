@@ -16,3 +16,7 @@ function App() {
 }
 
 export default App;
+
+// Container ile Dashboard ortalamadım, Naviyi üste koydum  onun etkilenmesini istemediğim için container içine almadım.
+//Semantic uı sayfayı 16 esit parcaya direkt böler. Bu sistem grid sitemidir.
+//Bootstrap 12 parçaya böler.

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   TableRow,
   TableHeaderCell,
@@ -8,41 +8,50 @@ import {
   TableBody,
   MenuItem,
   Icon,
-  Label,
   Menu,
   Table,
 } from "semantic-ui-react";
+import ProductService from "../services/productService";
+
+
+//distractor products:data , setProducts:fonksiyonu - useState[] default değeri boş bir array bunu değiştirmek istersem bu da -Hook -döndürür.
+//lifecycleHook- react yasam döngüsüne müdahale etmemizi sağlar.
+//componentDidMount sayfa yerleşti şimdi statei değiştireceğiz. producta müdahale.
 
 export default function ProductList() {
+  const [products, setProducts] = useState([]);
+
+  //sayfa yüklendiğinde burası çalışıyor.
+  useEffect(() => {
+    let productService = new ProductService();
+    productService
+      .getProducts()
+      .then((result) => setProducts(result.data.products));
+  },[]);
+
   return (
     <div>
       <Table celled>
         <TableHeader>
           <TableRow>
-            <TableHeaderCell>Header</TableHeaderCell>
-            <TableHeaderCell>Header</TableHeaderCell>
-            <TableHeaderCell>Header</TableHeaderCell>
+            <TableHeaderCell>Ürün Adı</TableHeaderCell>
+            <TableHeaderCell>Ürün Açıklaması</TableHeaderCell>
+            <TableHeaderCell>Ürün Fiyatı</TableHeaderCell>
+            <TableHeaderCell>Marka</TableHeaderCell>
+            <TableHeaderCell>Kategori</TableHeaderCell>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          <TableRow>
-            <TableCell>
-              <Label ribbon>First</Label>
-            </TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
+          {products.map((products) => (
+            <TableRow key={products.id}>
+              <TableCell>{products.title}</TableCell>
+              <TableCell>{products.description}</TableCell>
+              <TableCell>{products.price}</TableCell>
+              <TableCell>{products.brand}</TableCell>
+              <TableCell>{products.category}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
 
         <TableFooter>
@@ -67,3 +76,19 @@ export default function ProductList() {
     </div>
   );
 }
+
+//Tablerow gelen ürün sayısı kadar tekrar edecek.
+
+// export interface ProductList {
+// 	id: number;
+// 	title: string;
+// 	description: string;
+// 	price: number;
+// 	discountPercentage: number;
+// 	rating: number;
+// 	stock: number;
+// 	brand: string;
+// 	category: string;
+// 	thumbnail: string;
+// 	images: string[];
+// }
