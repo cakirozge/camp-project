@@ -1,9 +1,25 @@
-import React from "react";
+import React , {useState} from "react";
 import { MenuMenu, MenuItem, Menu, Container } from "semantic-ui-react";
 import CartSummary from "./CartSummary";
 import SignedOut from "./SignedOut";
 import SignedIn from "./SignedIn";
+
 export default function Navi() {
+//default ya true ya false olmalıdır. 
+//isAuthenticated kullandığımız (ya isAuthenticated'dır ya da isAuthenticated değildir bu nedenle false) için useStatein defaultu false olmaldır 
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
+
+  function handleSignOut(){
+    setIsAuthenticated(false)
+
+  }
+
+  function handleSignIn(){
+    setIsAuthenticated(true)
+
+  }
+
+
   return (
     <div>
       <Menu inverted fixed = "top">
@@ -12,8 +28,8 @@ export default function Navi() {
           <MenuItem name="messages" />
           <MenuMenu position="right">
             <CartSummary />
-            <SignedOut />
-            <SignedIn />
+            {isAuthenticated?<SignedIn signOut={handleSignOut} />
+            :<SignedOut signIn={handleSignIn}/>}
           </MenuMenu>
         </Container>
       </Menu>
@@ -24,3 +40,6 @@ export default function Navi() {
 //fixed: menu sayfa kaydıkça sabit kaldı.
 //inverted: menu siyah
 //container: menuyu sekillendirdik. menu içine yazdık. -semantic-uı
+
+// SignedOut ve SignedIn hangisini göstereceğine karar veren Navidir.
+//Bir datayı tutma yapmak istediğimizde aklımıza State gelmelidir.
