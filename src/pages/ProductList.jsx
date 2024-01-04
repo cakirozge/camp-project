@@ -28,7 +28,7 @@ export default function ProductList() {
     let productService = new ProductService();
     productService
       .getProducts()
-      .then((result) => setProducts(result.data.products));
+      .then( result=> setProducts(result.data.products));
   },[]);
 
   return (
@@ -46,7 +46,7 @@ export default function ProductList() {
 
         <TableBody>
           {products.map((product) => (
-            <TableRow key={products.id}>
+            <TableRow key={product.id}>
               <TableCell><Link to={`/products/${product.id}`}>{product.title}</Link></TableCell>
               <TableCell>{product.description}</TableCell>
               <TableCell>{product.price}</TableCell>

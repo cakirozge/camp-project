@@ -14,7 +14,7 @@ export default function Navi() {
 
   function handleSignOut() {
     setIsAuthenticated(false);
-    navigate("/");
+    navigate("/")
   }
 
   function handleSignIn() {
