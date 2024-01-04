@@ -37,9 +37,9 @@ export default function ProductList() {
         <TableHeader>
           <TableRow>
             <TableHeaderCell>Ürün Adı</TableHeaderCell>
-            <TableHeaderCell>Ürün Açıklaması</TableHeaderCell>
             <TableHeaderCell>Ürün Fiyatı</TableHeaderCell>
-            <TableHeaderCell>Marka</TableHeaderCell>
+            <TableHeaderCell>Stok Adedi</TableHeaderCell>
+            <TableHeaderCell>Ürün Açıklaması</TableHeaderCell>
             <TableHeaderCell>Kategori</TableHeaderCell>
           </TableRow>
         </TableHeader>
@@ -48,9 +48,9 @@ export default function ProductList() {
           {products.map((product) => (
             <TableRow key={product.id}>
               <TableCell><Link to={`/products/${product.id}`}>{product.title}</Link></TableCell>
-              <TableCell>{product.description}</TableCell>
               <TableCell>{product.price}</TableCell>
-              <TableCell>{product.brand}</TableCell>
+              <TableCell>{product.stock}</TableCell>
+              <TableCell>{product.description}</TableCell>
               <TableCell>{product.category}</TableCell>
             </TableRow>
           ))}
