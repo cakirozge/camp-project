@@ -6,7 +6,7 @@ import App from './App';
 import configureStore from './store/configureStore';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const store = configureStore();
 
@@ -20,6 +20,17 @@ root.render(
 );
 
 reportWebVitals();
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -18,9 +18,10 @@ const initialState = {
 //farklı referanslı yeni bir [] oluşur.
 //export default 
 export default function cartReducer(state = initialState, { type, payload }) {
+
   switch (type) {
     case ADD_TO_CARD:
-      let product = state.cartItems.find((c) => c.product.id == payload.id);
+      let product = state.cartItems.find((c) => c.product.id===payload.id);
       if (product) {
         product.quantity++;
         return {
